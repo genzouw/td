@@ -58,13 +58,6 @@ $ docker run --rm --volumes-from td-config genzouw/td db:list
 3 rows in set
 ```
 
-## Configuration
-
-```bash
-# hogehoge
-$ export XXX=
-```
-
 ## License
 
 This software is released under the MIT License, see LICENSE.
