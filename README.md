@@ -58,6 +58,12 @@ $ docker run --rm --volumes-from td-config genzouw/td db:list
 3 rows in set
 ```
 
+**I recommend that you set the following alias in `~/.*rc`.**
+
+```bash
+$ alias td='docker run --rm --volumes-from td-config genzouw/td'
+```
+
 ## License
 
 This software is released under the MIT License, see LICENSE.
