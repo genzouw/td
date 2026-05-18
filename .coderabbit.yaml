@@ -1,0 +1,4 @@
+language: "ja"
+reviews:
+  summary:
+    poem: false
