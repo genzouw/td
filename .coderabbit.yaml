@@ -50,7 +50,8 @@ reviews:
         - 外部 action は SHA pin されているか。
         - permissions: が最小権限になっているか。
 
-  # 生成物 / 依存物 / ロックファイルなどはレビュー対象から除外する。
+  # 生成物 / 依存物はレビュー対象から除外する。
+  # ロックファイルは supply-chain セキュリティの観点からレビュー対象に含める。
   path_filters:
     - "!**/dist/**"
     - "!**/build/**"
@@ -61,10 +62,6 @@ reviews:
     - "!**/.next/**"
     - "!infra/cdktf.out/**"
     - "!infra/.gen/**"
-    - "!**/bun.lock"
-    - "!**/package-lock.json"
-    - "!**/yarn.lock"
-    - "!**/pnpm-lock.yaml"
     - "!**/*.min.js"
     - "!**/*.min.css"
     - "!**/*.map"
