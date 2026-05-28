@@ -14,6 +14,11 @@ RUN apt-get update \
 RUN gem install td \
   && gem cleanup
 
-VOLUME ["/root/.td"]
+RUN groupadd --system --gid 1000 td \
+  && useradd --system --uid 1000 --gid td --create-home --home-dir /home/td --shell /usr/sbin/nologin td
+
+USER td
+
+VOLUME ["/home/td/.td"]
 
 ENTRYPOINT ["td"]
