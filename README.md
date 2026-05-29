@@ -78,7 +78,7 @@ File a [Github issue](https://github.com/genzouw//issues), send an email to [gen
 
 [genzouw](https://genzouw.com)
 
-- Twitter : @genzouw ( https://twitter.com/genzouw )
-- Facebook : genzouw ( https://www.facebook.com/genzouw )
-- LinkedIn : genzouw ( https://www.linkedin.com/in/genzouw/ )
-- Gmail : genzouw@gmail.com
+- Twitter: [@genzouw](https://twitter.com/genzouw)
+- Facebook: [genzouw](https://www.facebook.com/genzouw)
+- LinkedIn: [genzouw](https://www.linkedin.com/in/genzouw/)
+- Gmail: [genzouw@gmail.com](mailto:genzouw@gmail.com)
