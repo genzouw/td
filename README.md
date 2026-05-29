@@ -11,13 +11,13 @@
 This is a Docker image wrapping the command line client tool `td` of" Treasure Data ".
 Ruby installation, Gem installation, authentication information, etc. can all be managed by Docker container.
 
-*Please contact me anytime if you have a problem or request! My information is posted at the bottom of this document.*
+_Please contact me anytime if you have a problem or request! My information is posted at the bottom of this document._
 
 ## Requirements
 
 All you need is one.
 
-* [Docker](https://www.docker.com/)
+- [Docker](https://www.docker.com/)
 
 ## Installation
 
@@ -61,13 +61,12 @@ $ docker run --rm --volumes-from td-config genzouw/td db:list
 **I recommend that you set the following alias in `~/.*rc`.**
 
 ```bash
-$ alias td='docker run --rm --volumes-from td-config genzouw/td'
+alias td='docker run --rm --volumes-from td-config genzouw/td'
 ```
 
 ## License
 
 This software is released under the MIT License, see LICENSE.
-
 
 ## Help
 
@@ -79,7 +78,7 @@ File a [Github issue](https://github.com/genzouw//issues), send an email to [gen
 
 [genzouw](https://genzouw.com)
 
-* Twitter   : @genzouw ( https://twitter.com/genzouw )
-* Facebook  : genzouw ( https://www.facebook.com/genzouw )
-* LinkedIn  : genzouw ( https://www.linkedin.com/in/genzouw/ )
-* Gmail     : genzouw@gmail.com
+- Twitter: [@genzouw](https://twitter.com/genzouw)
+- Facebook: [genzouw](https://www.facebook.com/genzouw)
+- LinkedIn: [genzouw](https://www.linkedin.com/in/genzouw/)
+- Gmail: [genzouw@gmail.com](mailto:genzouw@gmail.com)
