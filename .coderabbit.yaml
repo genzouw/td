@@ -74,4 +74,19 @@ chat:
   auto_reply: true
 
 knowledge_base:
+  web_search:
+    enabled: true
   opt_out: false
+
+issue_enrichment:
+  auto_enrich:
+    enabled: true
+
+planning:
+  enabled: true
+  auto_planning:
+    enabled: true
+    labels:
+      - feature
+      - enhancement
+      - bug
