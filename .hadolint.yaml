@@ -6,3 +6,8 @@ ignored:
   # 将来の追従コストが大きくなるため、運用上は Dependabot によるベースイメージ
   # 更新側に任せ、本ルールは無視する。
   - DL3018
+  # ベースイメージ ruby:2.7.0-slim は Debian buster (EOL) で apt アーカイブ済みのため、
+  # apt パッケージの厳密バージョン固定はパッケージ入手不可によるビルド破壊を招く。
+  - DL3008 # Pin versions in apt get install
+  # gem の厳密バージョン固定は運用上の追従コストが大きいため無視する。
+  - DL3028 # Pin versions in gem install
