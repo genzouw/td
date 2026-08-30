@@ -17,9 +17,11 @@
 3. 利用量・レート制限・期間制限を超えた瞬間に課金が始まる "無料枠" 型でないこと
 4. 有料プラン / 有料ライセンス / 有料トライアル / シート課金 / クレジットカード登録を必要としないこと
 
-上記をひとつでも満たさないサービスを組み込む PR は **MUST NOT** です。提出された場合、内容の良し悪しにかかわらず、リポジトリの workflow および [`genzouw/ci-workflows`](https://github.com/genzouw/ci-workflows) の reusable workflow による CI チェックが失敗し、必要な status check とブランチ保護設定によりマージがブロックされます。
+上記をひとつでも満たさないサービスを組み込む PR は **MUST NOT** です。
+現状の CI (リポジトリの workflow および [`genzouw/ci-workflows`](https://github.com/genzouw/ci-workflows) の reusable workflow) は actionlint / Gitleaks / Hadolint / markdownlint / ShellCheck / Trivy / zizmor による構文・セキュリティスキャンのみを実施しており、無料枠依存・課金可能エンドポイント・有料プラン導入・新規 Secret 発行依頼といった本ポリシー固有の違反を自動検出する仕組みは **現時点では存在しません**。
+そのため本ポリシーの実効性は、主に PR レビュー (リポジトリオーナーおよびレビュー Bot によるチェック) に依存します。該当する MUST NOT 違反が見つかった場合、内容の良し悪しにかかわらずレビューで指摘し、修正または PR のクローズを求めます。CI による自動検出の拡充は今後の課題です。
 
-### 1.1 MUST NOT — これらを含む PR は CI チェック失敗によりマージがブロックされます
+### 1.1 MUST NOT — これらを含む PR はレビューで指摘され修正・クローズを求められます
 
 - **MUST NOT**: LLM プロバイダの API キー / トークンを GitHub Secrets に登録し、CI ワークフロー / GitHub Action から呼び出す構成の追加。
   - 該当する API キー例 (これらに限らない):
