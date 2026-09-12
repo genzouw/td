@@ -20,7 +20,7 @@ permissions:
 
 jobs:
   free-policy:
-    uses: genzouw/ci-workflows/.github/workflows/free-policy.yml@609fd1bc106a59ca902ac9846d29de9b5956632d # v1.1.0
+    uses: genzouw/ci-workflows/.github/workflows/free-policy.yml@eb84d0c974989515c0b26acc055948416f256533 # v1.1.1
     with:
       # 導入直後は誤検知を観察するため警告のみ (job は成功する)。
       # 一定期間 誤検知が無いことを確認したら本行を削除し、既定の enforce: true に戻す。
