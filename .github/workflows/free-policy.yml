@@ -20,8 +20,6 @@ permissions:
 
 jobs:
   free-policy:
+    # enforce は既定の true。違反を検出した PR は job が失敗する。
+    # 観察期間 (2026-09-12 導入〜) に警告の発生はゼロだったため警告のみ運用を終了した (#17)。
     uses: genzouw/ci-workflows/.github/workflows/free-policy.yml@eb84d0c974989515c0b26acc055948416f256533 # v1.1.1
-    with:
-      # 導入直後は誤検知を観察するため警告のみ (job は成功する)。
-      # 一定期間 誤検知が無いことを確認したら本行を削除し、既定の enforce: true に戻す。
-      enforce: false
