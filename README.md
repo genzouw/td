@@ -1,10 +1,8 @@
 # td (Treasure Data Client) on Docker
 
-[![Docker Cloud build status](https://img.shields.io/docker/cloud/build/genzouw/td?style=for-the-badge)](https://hub.docker.com/r/genzouw/td/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/genzouw/td.svg?style=for-the-badge)](https://hub.docker.com/r/genzouw/td/)
-[![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/genzouw/td.svg?style=for-the-badge)](https://hub.docker.com/r/genzouw/td/)
-
-[![dockeri.co](https://dockeri.co/image/genzouw/td)](https://hub.docker.com/r/genzouw/td)
+[![Docker Image Version](https://img.shields.io/docker/v/genzouw/td?sort=semver&style=for-the-badge)](https://hub.docker.com/r/genzouw/td/tags)
+[![Docker Image Size](https://img.shields.io/docker/image-size/genzouw/td/latest?style=for-the-badge)](https://hub.docker.com/r/genzouw/td/tags)
 
 ## Description
 
@@ -72,7 +70,7 @@ This software is released under the MIT License, see LICENSE.
 
 Got a question ?
 
-File a [Github issue](https://github.com/genzouw//issues), send an email to [genzouw@gmail.com](mailto:genzouw@gmail.com) or tweet to [@genzouw](https://twitter.com/genzouw) on Twitter.
+File a [GitHub issue](https://github.com/genzouw/td/issues), send an email to [genzouw@gmail.com](mailto:genzouw@gmail.com) or tweet to [@genzouw](https://twitter.com/genzouw) on Twitter.
 
 ## Author Information
 
