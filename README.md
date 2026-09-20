@@ -1,8 +1,8 @@
 # td (Treasure Data Client) on Docker
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/genzouw/td.svg?style=for-the-badge)](https://hub.docker.com/r/genzouw/td/)
-[![Docker Image Version](https://img.shields.io/docker/v/genzouw/td?sort=semver&style=for-the-badge)](https://hub.docker.com/r/genzouw/td/tags)
-[![Docker Image Size](https://img.shields.io/docker/image-size/genzouw/td/latest?style=for-the-badge)](https://hub.docker.com/r/genzouw/td/tags)
+[![Docker プル数](https://img.shields.io/docker/pulls/genzouw/td.svg?style=for-the-badge)](https://hub.docker.com/r/genzouw/td/)
+[![Docker イメージバージョン](https://img.shields.io/docker/v/genzouw/td?sort=semver&style=for-the-badge)](https://hub.docker.com/r/genzouw/td/tags)
+[![Docker イメージサイズ](https://img.shields.io/docker/image-size/genzouw/td/latest?style=for-the-badge)](https://hub.docker.com/r/genzouw/td/tags)
 
 ## Description
 
