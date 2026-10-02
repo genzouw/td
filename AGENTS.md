@@ -67,18 +67,19 @@ CI が検出しなかったことは「ポリシーに適合している」こ�
 
 ### 1.5 CI による自動検出範囲
 
-`.github/workflows/free-policy.yml` (実体は [`genzouw/ci-workflows`](https://github.com/genzouw/ci-workflows) の reusable workflow) が、本ポリシーのうち構文的に判定できる違反を検出します。走査対象は `.github/` 配下の YAML と composite action 定義 (`action.yml` / `action.yaml`) です。
+`.github/workflows/free-policy.yml` (実体は [`genzouw/ci-workflows`](https://github.com/genzouw/ci-workflows) の reusable workflow) が、本ポリシーのうち構文的に判定できる違反を検出します。違反を検出すると job が失敗します (`enforce: true`)。このチェック (context: `free-policy / Free-only policy check`) は `main` ブランチ保護の必須ステータスチェックであり、成功するまで PR はマージできません (管理者権限によるバイパスを除く)。
+走査対象は、`.github/` 配下の YAML / JSON、リポジトリルート直下の Renovate 設定 (`renovate.json` 等)、composite action 定義 (`action.yml` / `action.yaml`) です。Markdown やソースコードは走査しません。
 
 **CI が自動検出するもの**
 
-| 検出内容                                                                                | 対応する MUST NOT                      |
-| --------------------------------------------------------------------------------------- | -------------------------------------- |
-| `GITHUB_TOKEN` 以外の `secrets.*` 参照、および `secrets: inherit`                       | LLM / 従量課金 API キーの Secrets 登録 |
-| 従量課金 API キーを示す変数名 (`*_API_KEY` / `*_API_TOKEN` / プロバイダ名付きの鍵・URL) | 同上 (`vars.*` や平文での指定も含む)   |
-| 課金可能な LLM / 検索 API のエンドポイントホスト名                                      | OpenAI 互換エンドポイント経由での利用  |
-| サードパーティ Action のタグ参照 (SHA 未ピン留め) — `actionlint` と `zizmor` が検出     | フルコミット SHA での pin              |
+| 検出内容                                                                                                 | 対応する MUST NOT                      |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| 許可リストに無い `secrets.*` 参照、および `secrets: inherit`                                             | LLM / 従量課金 API キーの Secrets 登録 |
+| 従量課金 API キーを示す変数名 (`*_API_KEY` / `*_API_TOKEN` / `*_SECRET_KEY` / プロバイダ名付きの鍵・URL) | 同上 (`vars.*` や平文での指定も含む)   |
+| 課金可能な LLM / 検索 API のエンドポイントホスト名                                                       | OpenAI 互換エンドポイント経由での利用  |
 
-`secrets.*` はホワイトリスト方式です。本リポジトリは `GITHUB_TOKEN` 以外の Secrets を一切使っていないため、**`GITHUB_TOKEN` 以外の参照はすべて違反として検出** されます。正当な例外が必要な場合は、対象行に `free-policy: allow <理由>` を含むコメントを書いて除外し、その理由を PR 本文にも記載してください。
+`secrets.*` は許可リスト方式です。本リポジトリのスタブは `allowed_secrets` を指定していないため、**`GITHUB_TOKEN` 以外の参照はすべて違反として検出** されます。
+サードパーティ Action のタグ参照 (SHA 未ピン留め) は、`free-policy` ではなく `actionlint` と `zizmor` が検出します。
 
 **CI が自動検出しないもの (レビューで判断します)**
 
@@ -89,9 +90,20 @@ CI が検出しなかったことは「ポリシーに適合している」こ�
 - 既存テスト / lint / セキュリティスキャンのスキップ・無効化
 - 既に導入済みのツールとの機能重複
 
-いずれも意味的な判断が必要で、CI では誤検知・見逃しの両方が避けられないため実装していません。これらは PR 本文での説明 (3 章) とレビューでカバーします。
+いずれも意味的な判断が必要なため、PR 本文での説明 (3 章) とレビューでカバーします。**`free-policy` が成功したことは、本ポリシーへの適合を意味しません。**
 
-> **運用に関する注記**: `free-policy` チェックは違反を検出すると **job が失敗** します (`enforce: true`)。導入直後 (2026-09-12) は誤検知を観察するため警告のみの運用でしたが、観察期間中に警告の発生がゼロだったため強制適用へ切り替えました。このチェック (context: `free-policy / Free-only policy check`) は `main` ブランチ保護の必須ステータスチェックであり、成功するまで PR はマージできません (管理者権限によるバイパスを除く)。違反が出ている PR は、原因を取り除くか `free-policy: allow <理由>` マーカーで除外してチェックを成功させてから、レビュー・マージすること。
+**例外の指定 (マーカーと `allowed_secrets`)**
+
+誤検知や、課金を伴わない正当な参照を除外する手段は次の 2 つです。
+
+- 対象行に `free-policy: allow <理由>` を含むコメントを書く
+- スタブ (`.github/workflows/free-policy.yml`) の `allowed_secrets` に Secret 名を追加する。鍵名パターン (`*_API_KEY` / `*_API_TOKEN` / `*_SECRET_KEY`・プロバイダ名付き) に合致する名前は指定できず、指定すると `enforce` の値にかかわらず job が失敗する (プロバイダ名付きでなく、名前に `GITHUB` を単語として含むものを除く)。その場合は行内マーカーを使う
+
+どちらも次のルールに従ってください。
+
+- **MUST**: 追加した例外とその理由を PR 本文にも書く。
+- **MUST NOT**: 本ポリシーから外れる導入 (1.1 節の MUST NOT に該当するもの) を、例外の指定で通すこと。5 章のとおり、1.1 節の MUST NOT はリポジトリオーナーの承認でも上書きされません。課金が一切発生しないと確信できないグレーゾーンの構成は、PR を作成する前に Issue で提案してください。
+- 新規 Secret が必要になる場合は、6 章のとおり PR を作らずに Issue で提案してください。
 
 ---
 
@@ -99,7 +111,7 @@ CI が検出しなかったことは「ポリシーに適合している」こ�
 
 - [ ] 追加するサービスが「公開 OSS リポジトリで完全無料で利用可能」であることを、**公式の料金ページ / ドキュメントの URL** で証明している。
 - [ ] LLM プロバイダの API キー / 従量課金 API キーを GitHub Secrets に追加していない。`GEMINI_API_KEY` / `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` 等を `secrets.*` から参照する記述、および `OPENAI_API_BASE_URL` などを課金可能な endpoint へ向ける設定が追加・変更したファイルに含まれていない (`free-policy` チェックが自動検出します)。
-- [ ] `free-policy` チェックが成功している (`main` の必須ステータスチェックのため、失敗したままではマージできない)。例外として `free-policy: allow <理由>` マーカーを追加した場合は、その理由を PR 本文に記載している。
+- [ ] `free-policy` チェックが成功している (`main` の必須ステータスチェックのため、失敗したままではマージできない)。例外として `free-policy: allow <理由>` マーカーや `allowed_secrets` を追加した場合は、その内容と理由を PR 本文に記載している (1.5 節)。
 - [ ] 「無料枠内に収まる前提」の利用ではなく、「課金が一切発生しない構成」であることを PR 本文に明記している。
 - [ ] 追加する GitHub Action は **フルコミット SHA で pin** している。
 - [ ] `.github/workflows/` 配下の既存ワークフローと機能が重複していないことを確認した。
