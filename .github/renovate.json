@@ -1,5 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "dependencyDashboard": false,
   "description": [
     "minimumReleaseAge は 7 日 → 1 日 → 3 日 に変更する。1 日では短く、公開直後の不具合やサプライチェーン攻撃を取り込むリスクがあるため、3 日待ってから更新 PR を作る。automerge は無く更新 PR は人が確認してからマージする。",
     "minimumReleaseAgeBehaviour は timestamp-optional にする。全リポジトリで設定を揃えるため。公開日時を返さないレジストリ（Docker Hub / GHCR 等）でも更新 PR が止まらないが、その依存には待機期間が効かない。",
