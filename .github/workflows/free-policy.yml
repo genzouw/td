@@ -24,4 +24,4 @@ jobs:
   free-policy:
     # enforce は既定の true。違反を検出した PR は job が失敗する。
     # 観察期間 (2026-09-12 導入〜) に警告の発生はゼロだったため警告のみ運用を終了した (#17)。
-    uses: genzouw/ci-workflows/.github/workflows/free-policy.yml@1c76655fad03bf6399668886f5586587f548b619 # v1.5.38
+    uses: genzouw/ci-workflows/.github/workflows/free-policy.yml@cc441eafc266a41df7c90dce5b434f2c8769cb66 # v1.5.43
